@@ -7,8 +7,20 @@ html {
 	box-sizing: inherit;
 }
 
+:root {
+    --primaryFont: "Comfortaa";
+    --baseFontSize: 1rem;
+	--h1FontSize: 2rem;
+}
+
 body {
     min-height: 100%;
+    font-family: var(--primaryFont);
+    font-size: var(--primaryFont);
+}
+
+h1 {
+    font-size: var(--h1FontSize);
 }
 
 .content {
@@ -25,14 +37,16 @@ body {
     justify-content: center;
     align-items: center;    
     flex-wrap: wrap;  
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     background-color: lightgray;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .grid-item {
-    width: 31.25px;
-    height: 31.25px;
+    width: 37.5px;
+    height: 37.5px;
     border: 1px solid black;
 }
 
