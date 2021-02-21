@@ -1,3 +1,4 @@
+let penColor = "rainbow";
 
 function getRandomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -10,43 +11,111 @@ function getRandomRGBColor() {
     return [randomR, randomG, randomB];
 }
 
+function rgbStringToArray(rgbString) {
+    let result = rgbString.slice(4, -1).split(",").map(item => Number(item));
+    return result;
+}
+
+function rgbArrayToString(rgbArray) {
+    return `rgb(${rgbArray.join(',')})`;
+}
+
+function darkenRGB(rgbArray) {
+    if (rgbArray[0] > 0) {
+        return rgbArray.map(value => value -= 26);
+    } else {
+        return [0,0,0];
+    }
+}
+
+function setPenColor() {
+    penColor = this.dataset.color;
+}
+
 function clearGrid() {
-    let items = document.querySelectorAll(".grid-item");
-    items.forEach(grid => grid.removeAttribute("style"));
+    let items = Array.from(document.querySelectorAll(".grid-item"));
+    items.forEach(grid => {
+        grid.style.backgroundColor = 'white';
+        grid.classList.remove("shaded");
+    });
+}
+
+function setGridSize() {
+
+    let size = prompt("Please enter new size");
+    if (size !== '') {
+        let newSize = Number(size);
+        if (newSize < 1 || newSize > 100 || isNaN(newSize)) {
+            alert("Enter a valid input. Valid input range: 1 - 100");
+            setGridSize();
+        } else {
+            const grid = document.querySelector(".container");
+            grid.textContent = '';            
+            generateGrid(newSize);
+        }
+    } else {
+        alert("Enter a valid input. Valid input range: 1 - 100");
+        setGridSize();
+    }
 }
 
 function changeGridColor() {
-    const rgbArray = getRandomRGBColor();
-    this.style.backgroundColor = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`;
+    if (penColor === "rainbow") {
+        const rgbArray = getRandomRGBColor();
+        this.style.backgroundColor = rgbArrayToString(rgbArray);
+        this.classList.remove("shaded");
+    } else if (penColor === "black") {
+        this.style.backgroundColor = "rgb(0, 0, 0)";
+        this.classList.remove("shaded");
+    } else if (penColor === "shaded") {
+        if (!this.style.backgroundColor || !this.classList.contains("shaded")) {
+            this.style.backgroundColor = "rgb(234, 234, 234)";
+            this.classList.add("shaded")
+        } else {
+            let rgbArray = rgbStringToArray(this.style.backgroundColor);
+            let newRgb = darkenRGB(rgbArray);
+            console.log(newRgb);
+            this.style.backgroundColor = rgbArrayToString(newRgb);
+        }
+        
+    }
 }
 
-function createGridSqaure() {
-    const container = document.querySelector(".container");
+function createGridSqaure(size) {
+    const grid = document.querySelector(".container");
     let gridItem = document.createElement("div");
+    console.log(size);
+    gridItem.style.width = `${size}px`;
+    gridItem.style.height = `${size}px`;
     gridItem.classList.add("grid-item");
     gridItem.addEventListener("mouseover", changeGridColor);
-    container.appendChild(gridItem);
+    grid.appendChild(gridItem);
 }
 
 function createBreak() {
-    const container = document.querySelector(".container");
+    const grid = document.querySelector(".container");
     let breakItem = document.createElement("div");
     breakItem.classList.add("break");
-    container.appendChild(breakItem);
+    grid.appendChild(breakItem);
 }
 
-function generateGrid(width, height) {
-    for (let i = 0; i < height; i++) {   
-        for (let j = 0; j < width; j++) {
-            createGridSqaure();
+function generateGrid(size) {
+    const width = document.querySelector(".container").getBoundingClientRect().width;
+    for (let i = 0; i < size; i++) {   
+        for (let j = 0; j < size; j++) {
+            createGridSqaure(width / size);
         }
         createBreak();
     }
 }
 
-generateGrid(16, 16);
-
-let colorMode = "Rainbow"
+generateGrid(16);
 
 const clearButton = document.querySelector(".clearBtn");
 clearButton.addEventListener("click", clearGrid);
+
+const setSizeButton = document.querySelector(".setSizeBtn");
+setSizeButton.addEventListener("click", setGridSize);
+
+const colorButtons = Array.from(document.querySelectorAll(".set-color"));
+colorButtons.forEach(button => button.addEventListener("click", setPenColor));
