@@ -33,6 +33,17 @@ function setPenColor() {
     penColor = this.dataset.color;
 }
 
+function toggleColorButton() {
+    const btns = Array.from(document.querySelectorAll(".set-color"));
+    btns.forEach(item => {
+        if (item.classList.contains("active")) {
+            item.classList.remove("active");
+        }
+    });
+    this.classList.add("active");
+    setPenColor.call(this);
+}
+
 function clearGrid() {
     let items = Array.from(document.querySelectorAll(".grid-item"));
     items.forEach(grid => {
@@ -127,5 +138,5 @@ const setSizeButton = document.querySelector(".setSizeBtn");
 setSizeButton.addEventListener("click", setGridSize);
 
 const colorButtons = Array.from(document.querySelectorAll(".set-color"));
-colorButtons.forEach(button => button.addEventListener("click", setPenColor));
+colorButtons.forEach(button => button.addEventListener("click", toggleColorButton));
 
