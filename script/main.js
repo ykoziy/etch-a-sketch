@@ -1,4 +1,5 @@
 let penColor = "rainbow";
+let isDrawing = false;
 
 function getRandomNum(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -59,25 +60,30 @@ function setGridSize() {
     }
 }
 
+function setDrawingState(e) {
+    if (e.button == 0) {
+        isDrawing = !isDrawing;
+        changeGridColor.call(e.target);
+    }
+}
+
 function changeGridColor() {
-    if (penColor === "rainbow") {
+    if (penColor === "rainbow" && isDrawing) {
         const rgbArray = getRandomRGBColor();
         this.style.backgroundColor = rgbArrayToString(rgbArray);
         this.classList.remove("shaded");
-    } else if (penColor === "black") {
+    } else if (penColor === "black" && isDrawing) {
         this.style.backgroundColor = "rgb(0, 0, 0)";
         this.classList.remove("shaded");
-    } else if (penColor === "shaded") {
+    } else if (penColor === "shaded" && isDrawing) {
         if (!this.style.backgroundColor || !this.classList.contains("shaded")) {
             this.style.backgroundColor = "rgb(234, 234, 234)";
             this.classList.add("shaded")
         } else {
             let rgbArray = rgbStringToArray(this.style.backgroundColor);
             let newRgb = darkenRGB(rgbArray);
-            console.log(newRgb);
             this.style.backgroundColor = rgbArrayToString(newRgb);
-        }
-        
+        }   
     }
 }
 
@@ -111,6 +117,9 @@ function generateGrid(size) {
 
 generateGrid(16);
 
+const container = document.querySelector(".container");
+container.addEventListener("mousedown", setDrawingState)
+
 const clearButton = document.querySelector(".clearBtn");
 clearButton.addEventListener("click", clearGrid);
 
@@ -119,3 +128,4 @@ setSizeButton.addEventListener("click", setGridSize);
 
 const colorButtons = Array.from(document.querySelectorAll(".set-color"));
 colorButtons.forEach(button => button.addEventListener("click", setPenColor));
+
