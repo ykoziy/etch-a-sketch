@@ -3,6 +3,8 @@
     <meta charset="utf-8">
     <head>
         <title>Etch-a-Sketch</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="style/reset.css">
         <link rel="stylesheet" href="style/index.css">   
     </head>
@@ -11,8 +13,13 @@
             <h1>Etch-a-Sketch</h1>
             <div class="container">
             </div>
+            <div class="instructions">
+                <h2>Instructions:</h2>
+                <p>- Press left mouse button inside the drawing space to toggle drawing mode.</p>
+                <p>- Active color mode indicated by the green text and border on the buttons below.</p>
+            </div>
             <div class="controls">
-                <button class="set-color" data-color="rainbow">Rainbow</button>
+                <button class="set-color active" data-color="rainbow">Rainbow</button>
                 <button class="set-color" data-color="shaded">Shaded</button>
                 <button class="set-color" data-color="black">Black</button>
                 <button class="clearBtn">Clear</button>
