@@ -1,95 +1,101 @@
 html {
-	height: 100%;
-	box-sizing: border-box;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-*, *:before, *:after {
-	box-sizing: inherit;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 :root {
-    --primaryFont: "Comfortaa";
-    --secondaryFont: "Roboto";
-    --baseFontSize: 1rem;
-    --h1FontSize: 2rem;
-    --h2FontSize: 1.5rem;
-    --buttonFontSize: 1.1rem;
+  --primaryFont: 'Comfortaa';
+  --secondaryFont: 'Roboto';
+  --baseFontSize: 1rem;
+  --h1FontSize: 2rem;
+  --h2FontSize: 1.5rem;
+  --buttonFontSize: 1.1rem;
 }
 
 body {
-    min-height: 100%;
-    font-family: var(--primaryFont, cursive);
-    font-size: var(--primaryFont);
-    background-color: #d9dddf;
+  min-height: 100%;
+  font-family: var(--primaryFont, cursive);
+  font-size: var(--primaryFont);
+  background-color: #d9dddf;
 }
 
 h1 {
-    font-size: var(--h1FontSize);
+  font-size: var(--h1FontSize);
 }
 
 h2 {
-    font-size: var(--h2FontSize);
+  font-size: var(--h2FontSize);
 }
 
 p {
-    font-family: var(--secondaryFont);
-    margin-top: 1em;
-    margin-bottom: 1em;
+  font-family: var(--secondaryFont);
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 button {
-    font-family: var(--secondaryFont, sans-serif);
-    font-size: var(--buttonFontSize);
-    border: 2px solid black;
-    border-radius: 8px;
-    padding: 10px 20px;
+  font-family: var(--secondaryFont, sans-serif);
+  font-size: var(--buttonFontSize);
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 10px 20px;
 }
 
 .active {
-    color: darkgreen;
-    border-color: darkgreen;
+  color: darkgreen;
+  border-color: darkgreen;
+}
+
+.body-wrapper {
+  margin: 35px;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    flex-wrap: wrap;  
-    width: 600px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    border: 10px solid orangered;
-    background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 600px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 10px solid orangered;
+  background-color: white;
 }
 
 .instructions {
-    margin: 10px;
+  margin: 10px;
 }
 
 .controls {
-    display: flex;
-    justify-content: space-evenly;
-    width: 600px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 600px;
 }
 
 .grid-item {
-    width: 37.5px;
-    height: 37.5px;
-    border: 1px solid black;
-    flex: 1;
+  width: 37.5px;
+  height: 37.5px;
+  border: 1px solid black;
+  flex: 1;
 }
 
 .break {
-    flex-basis: 100%;
-    height: 0;
+  flex-basis: 100%;
+  height: 0;
 }
